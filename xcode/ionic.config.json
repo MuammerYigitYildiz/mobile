@@ -1,0 +1,7 @@
+{
+  "name": "xcode",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
