@@ -1,0 +1,34 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .login-logo {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+
+  }
+
+  .login-form {
+    max-width: 300px;
+    width: 80%;
+
+    form {
+      ion-input {
+        margin-bottom: 15px;
+      }
+
+      ion-checkbox {
+        margin-bottom: 15px;
+      }
+
+      ion-button {
+        background-color: #3880ff;
+        color: #fff;
+      }
+    }
+  }
+}
