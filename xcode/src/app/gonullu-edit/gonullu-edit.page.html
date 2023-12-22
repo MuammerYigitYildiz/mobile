@@ -1,0 +1,117 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gonullu Guncelle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="formData">
+    <form>
+      <ion-item>
+        <ion-label position="stacked">Adı</ion-label>
+        <ion-input [(ngModel)]="formData.adi" name="adi"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Soyadı</ion-label>
+        <ion-input [(ngModel)]="formData.soyadi" name="soyadi"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Tc Kimlik</ion-label>
+        <ion-input [(ngModel)]="formData.tcKimlik" name="tcKimlik" type="number"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="stacked">Doğum Yılı</ion-label>
+        <ion-datetime-button datetime="BirthDateTime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="BirthDateTime" [(ngModel)]="formData.dogumYili" name="dogumYili" presentation="date"
+                          [preferWheel]="true"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Kimlik Teslim Tarihi</ion-label>
+        <ion-datetime-button datetime="iDDeliveryDate"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="iDDeliveryDate" [(ngModel)]="formData.kimlikTeslimTarihi" name="kimlikTeslimTarihi"
+                          presentation="date"
+                          [preferWheel]="true"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Meslek</ion-label>
+        <ion-input [(ngModel)]="formData.meslek" name="meslek"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Baba Adı</ion-label>
+        <ion-input [(ngModel)]="formData.babaAdi" name="babaAdi"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">STK</ion-label>
+        <ion-input [(ngModel)]="formData.stk" name="stk"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Ayakkabı Numarası</ion-label>
+        <ion-select [(ngModel)]="formData.ayakkabiNo" name="ayakkabiNumarasi">
+          <ng-container *ngFor="let numara of ayakkabiNumaralari">
+            <ion-select-option [value]="numara">{{ numara }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Açıklama</ion-label>
+        <ion-input [(ngModel)]="formData.aciklama" name="aciklama"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input [(ngModel)]="formData.email" name="email" type="email" fill="solid"></ion-input>
+      </ion-item>
+
+      <app-kan-grubu [(selectedKanGrubu)]="formData.kanGrubu"></app-kan-grubu>
+
+      <app-cinsiyet [(selectedCinsiyet)]="formData.cinsiyet"></app-cinsiyet>
+
+      <app-beden [(selectedBeden)]="formData.beden"></app-beden>
+
+      <app-ogrenim-durumu [(selectedOgrenimDurumu)]="formData.ogrenimDurumu"></app-ogrenim-durumu>
+
+      <app-il [(selectedIl)]="formData.il"></app-il>
+
+      <ion-item>
+        <ion-label position="stacked">İlçe</ion-label>
+        <ion-input [(ngModel)]="formData.ilce" name="ilce"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Mahalle</ion-label>
+        <ion-input [(ngModel)]="formData.mahalle" name="mahalle"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Adres</ion-label>
+        <ion-input [(ngModel)]="formData.adres" name="adres"></ion-input>
+      </ion-item>
+
+      <app-map [(selectedEnlem)]="formData.enlem" [(selectedBoylam)]="formData.boylam" [(selectedIl)]="formData.il"
+               [(selectedIlce)]="formData.ilce" [(selectedAdres)]="formData.adres" [(selectedMahalle)]="formData.mahalle"></app-map>
+
+      <ion-button (click)="sendFormData()">Bilgilerimi Guncelle</ion-button>
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,23 @@
+{
+  "configurations" : [
+    {
+      "id" : "AB85BC09-E921-462D-BC43-2A31FBF94F30",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:App.xcodeproj",
+      "identifier" : "504EC3031FED79650016851F",
+      "name" : "App"
+    }
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

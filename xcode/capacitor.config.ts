@@ -5,7 +5,10 @@ const config: CapacitorConfig = {
   appName: 'xcode',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'https',
+    iosScheme: 'https',
+    hostname: 'localhost',
+    port: 8100
   }
 };
 

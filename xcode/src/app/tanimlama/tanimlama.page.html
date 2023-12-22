@@ -1,0 +1,170 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Niteliklerim</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="belgeler.length>0">
+    <img style="width: 200px; height: 200px;"
+         src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-add-folder-flat-icon-png-image_9149269.png"/>
+    <ion-card-header>
+      <ion-card-title>Belge</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-accordion-group *ngFor="let b of belgeler">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ b.belge.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>Verildiği Kurum/Kişi:</b> {{ b.verildigiKurumKisi}}</div>
+          <div class="ion-padding" slot="content"><b>Geçerlilik Tarihi:</b> {{ formatDate(b.tarih)}}</div>
+
+        </ion-accordion>
+      </ion-accordion-group>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;"
+         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEqPv4Sa7gkNTly0wCCOajx6ddwVTz3yu0kF_r5uXw9jpHPTkGKw8HvWmfxHJPC97fxiY&usqp=CAU"/>
+    <ion-card-header>
+      <ion-card-title>Egitim</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group *ngFor="let e of egitimler">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ e.egitim.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>Detay:</b> {{ e.egitim.aciklama}}</div>
+          <div class="ion-padding" slot="content"><b>Eğitim Süresi:</b> {{ e.egitim.sure}}</div>
+          <div class="ion-padding" slot="content"><b>Öğrenim Durumu:</b> {{ e.egitim.tip.code}}</div>
+
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;"
+         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlP6R4z86FfIqxVRBB-4qSmEBlw_aTZkdec9tcZ56yTmG8D8OT61USpwYxOfq6__A0PX0&usqp=CAU"/>
+    <ion-card-header>
+      <ion-card-title>Ekipman</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group *ngFor="let e of ekipmanlar">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ e.ekipman.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>Teslim tarihi:</b> {{ formatDate(e.tarih)}}</div>
+          <div class="ion-padding" slot="content"><b>Ekipman Markası:</b> {{ e.ekipmanMarkasi}}</div>
+          <div class="ion-padding" slot="content"><b>Ekipman Modeli:</b> {{ e.ekipmanModeli}}</div>
+          <div class="ion-padding" slot="content"><b>Ekipman Sayısı:</b> {{ e.ekipmanSayisi}}</div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;"
+         src="https://i0.wp.com/hefe.com.tr/wp-content/uploads/kkd.png?fit=479%2C550&ssl=1"/>
+    <ion-card-header>
+      <ion-card-title>KKD</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-accordion-group *ngFor="let k of kkdler">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ k.kkd.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>KKD Sayısı:</b> {{ k.adedi}}</div>
+          <div class="ion-padding" slot="content"><b>Teslim Tarihi:</b> {{ formatDate(k.teslimTarihi)}}</div>
+          <div class="ion-padding" slot="content"><b>Teslim Senedi:</b> {{ k.teslimSenedi}}</div>
+        </ion-accordion>
+      </ion-accordion-group>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;" src="https://www.ozdenosgb.com/img/blog/icon/acil-durum-tatbikati.png"/>
+    <ion-card-header>
+      <ion-card-title>Tatbikat</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-accordion-group *ngFor="let t of tatbikatlar">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ t.tatbikat.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>Detay:</b> {{ t.tatbikat.aciklama}}</div>
+          <div class="ion-padding" slot="content"><b>Başlıngıç Tarihi:</b> {{ formatDate(t.tatbikat.baslangicTarihi)}}</div>
+          <div class="ion-padding" slot="content"><b>Bitiş Tarihi:</b> {{ formatDate(t.tatbikat.bitisTarihi)}}</div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;"
+         src="https://media.istockphoto.com/id/1257882681/tr/vekt%C3%B6r/teknik-uzman-simgesi.jpg?s=170667a&w=0&k=20&c=mTeyqOWt-Ll8JoedP97AfIGDMyiEKhKYn0fq2sIM-Hs="/>
+    <ion-card-header>
+      <ion-card-title>Uzmanlik</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group *ngFor="let u of uzmanliklar">
+        <ion-accordion value>
+          <ion-item slot="header" color="light">
+            <ion-label>{{ u.uzmanliklar.adi }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><b>Geçerlilik Tarihi:</b> {{ formatDate(u.tarih)}}</div>
+          <div class="ion-padding" slot="content"><b>Uzmanlık Numarası:</b> {{ u.uzmanlikNumarasi}}</div>
+          <div class="ion-padding" slot="content"><b>Uzmanlık Vasfı:</b> {{u.uzmanlikVasfi}}</div>
+          <div class="ion-padding" slot="content"><b>Verildiği Kurum/Kişi:</b> {{u.verildigiKurumKisi}}</div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img style="width: 200px; height: 200px;"
+         src="https://yangindanismanligi.com/wp-content/uploads/2018/07/Yang%C4%B1n-E%C4%9Fitimleri-ve-Yang%C4%B1n-Tatbikatlar%C4%B1.png"/>
+    <ion-card-header>
+      <ion-card-title>Yangin</ion-card-title>
+      <ion-card-subtitle>{{ formData.email }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-content>
+        <ion-accordion-group *ngFor="let y of yanginlar">
+          <ion-accordion value>
+            <ion-item slot="header" color="light">
+              <ion-label>{{ y.yangin.adi }}</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content"><b>Detay:</b> {{ y.yangin.aciklama}}</div>
+            <div class="ion-padding" slot="content"><b>Başlangıç Tarihi:</b> {{formatDate(y.yangin.baslangicTarihi) }}</div>
+            <div class="ion-padding" slot="content"><b>Bitiş Tarihi:</b> {{formatDate(y.yangin.bitisTarihi)}}</div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

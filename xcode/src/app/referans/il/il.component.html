@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label position="stacked">İl</ion-label>
+  <ion-select [(ngModel)]="selectedIl" (ionChange)="onIlSelectionChange($event)" [compareWith]="compareWith" name="il">
+    <ion-select-option *ngFor="let il of iller" [value]="il">
+      {{ il["adi"] }}
+    </ion-select-option>
+
+  </ion-select>
+</ion-item>

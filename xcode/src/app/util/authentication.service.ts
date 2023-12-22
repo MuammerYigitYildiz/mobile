@@ -4,15 +4,23 @@ import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable} from 'rxjs';
 import {environment} from "../../environments/environment";
-import { EventEmitter } from '@angular/core';
+import {EventEmitter} from '@angular/core';
 import {FormControl, ɵValue} from "@angular/forms";
+import {AccountService} from "../account/account.services";
+
+const AUTH_KEY = 'auth';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private isAuthenticated2 = false;
 
-  constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) {
+
+  constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private accountService: AccountService,) {
+
+    this.isAuthenticated2 = JSON.parse(localStorage.getItem(AUTH_KEY) || 'false');
   }
 
   authenticate(credentials: any, token: string): Observable<any> {
@@ -24,19 +32,21 @@ export class AuthenticationService {
 
     return this.http.post<any>(`${environment.apiUrl}/auth/authenticate`, credentials, requestOptions);
   }
+
   loginStatusChanged = new EventEmitter<boolean>();
 
   finishAuthentication(token: any, rememberMe: ɵValue<FormControl<boolean | null>> | undefined): void {
     if (rememberMe) {
-      localStorage.setItem('token', token);
-      sessionStorage.removeItem('token');
-      this.loginStatusChanged.emit(true); // Etkinliği tetikleyin
-
-    } else {
       sessionStorage.setItem('token', token);
       localStorage.removeItem('token');
       this.loginStatusChanged.emit(true); // Etkinliği tetikleyin
+      this.login()
 
+    } else {
+      localStorage.setItem('token', token);
+      sessionStorage.removeItem('token');
+      this.loginStatusChanged.emit(true); // Etkinliği tetikleyin
+      this.login()
     }
 
     this.navigateDefault();
@@ -52,7 +62,6 @@ export class AuthenticationService {
     const tokenInSessionStorage: string | null = sessionStorage.getItem('token');
     return (tokenInLocalStorage || tokenInSessionStorage) || '';
   }
-
 
 
   getParsedToken(): any {
@@ -88,25 +97,21 @@ export class AuthenticationService {
     return [];
   }
 
-  /*    getUser() {
-          const tokenObj = this.getParsedToken();
+  isLoggedIn() {
+    return this.isAuthenticated2;
+  }
 
-          if (tokenObj) {
-              return {
-                  username: tokenObj.sub,
-                  firstname: tokenObj.fnam,
-                  lastname: tokenObj.lnam,
-                  lang: tokenObj.lang,
-                  userid: tokenObj.usid,
-                  useruuid: tokenObj.uuid,
-              };
-          }
-          return null;
-      }*/
+  login() {
+    this.isAuthenticated2 = true;
+    localStorage.setItem(AUTH_KEY, 'true');
 
-  logOut(): void {
+  }
+
+  logout(): void {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
+    this.isAuthenticated2 = false;
+    localStorage.removeItem(AUTH_KEY);
   }
 
 

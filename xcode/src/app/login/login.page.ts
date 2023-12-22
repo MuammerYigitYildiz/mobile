@@ -7,6 +7,7 @@ import {ReCaptchaV3Service} from 'ng-recaptcha';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Login} from './log';
 import {ToastController} from '@ionic/angular';
+import {AccountService} from "../account/account.services";
 
 
 @Component({
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
     sanitizer: DomSanitizer,
     private toastController: ToastController,
     private authenticationService: AuthenticationService,
+    private accountService: AccountService,
     private recaptchaV3Service: ReCaptchaV3Service,
     private renderer: Renderer2
   ) {
@@ -64,24 +66,23 @@ export class LoginPage implements OnInit {
         this.authenticationService.authenticate(this.form.value, token).subscribe({
           next: (response: any) => {
             if (response.headers.get('Authorization')) {
-             /* this.presentToast('Giris basarili', true);*/
+              this.presentToast('Giris basarili', true);
               this.authenticationService.finishAuthentication(response.headers.get('Authorization'), this.form.value.rememberMe);
-              this.router.navigateByUrl('/app/tabs/gonullu');
+              this.router.navigateByUrl('/account');
             } else {
               console.log('Giriş başarısız. Lütfen kimlik bilgilerinizi kontrol edin.');
-             /* this.presentToast('giris basarisiz, bilgilerinizi kontrol ediniz lutfen', false);*/
+              this.presentToast('giris basarisiz, bilgilerinizi kontrol ediniz lutfen', false);
             }
           },
           error: (error: any) => {
             console.error('Giriş sırasında hata oluştu:', error);
-            /*this.presentToast('Giris sirasinda bir hata olustu, lutfen sonra tekrar deneyiniz', false);*/
+            this.presentToast('Giris sirasinda bir hata olustu, lutfen sonra tekrar deneyiniz', false);
           },
         });
       },
     });
   }
 
-/*
   async presentToast(message: string, success: boolean) {
     const color = success ? 'success' : 'danger';
     const toast = await this.toastController.create({
@@ -92,7 +93,6 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-*/
 
 
 }

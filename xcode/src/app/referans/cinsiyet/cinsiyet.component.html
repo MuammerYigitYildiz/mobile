@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label position="stacked">Cinsiyet</ion-label>
+  <ion-select [(ngModel)]="selectedCinsiyet" (ionChange)="onCinsiyetSelectionChange($event)" [compareWith]="compareWith" name="cinsiyet">
+    <ion-select-option *ngFor="let cinsiyet of cinsiyetler" [value]="cinsiyet">
+      {{ cinsiyet["name"] }}
+    </ion-select-option>
+
+  </ion-select>
+</ion-item>

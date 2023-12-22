@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label position="stacked">Ogrenim Durumu</ion-label>
+  <ion-select [(ngModel)]="selectedOgrenimDurumu" (ionChange)="onOgrenimDurumuSelectionChange($event)" [compareWith]="compareWith" name="beden">
+    <ion-select-option *ngFor="let ogrenimDurumu of ogrenimDurumlari" [value]="ogrenimDurumu">
+      {{ ogrenimDurumu["name"] }}
+    </ion-select-option>
+
+  </ion-select>
+</ion-item>
