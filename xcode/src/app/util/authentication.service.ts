@@ -39,13 +39,13 @@ export class AuthenticationService {
     if (rememberMe) {
       sessionStorage.setItem('token', token);
       localStorage.removeItem('token');
-      this.loginStatusChanged.emit(true); // Etkinliği tetikleyin
+      this.loginStatusChanged.emit(true);
       this.login()
 
     } else {
       localStorage.setItem('token', token);
       sessionStorage.removeItem('token');
-      this.loginStatusChanged.emit(true); // Etkinliği tetikleyin
+      this.loginStatusChanged.emit(true);
       this.login()
     }
 

@@ -3,6 +3,7 @@ import {AccountService} from "./account.services";
 import {AuthenticationService} from "../util/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NavController, ToastController} from "@ionic/angular";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -46,7 +47,7 @@ export class AccountPage implements OnInit {
   loadGonullu() {
     const email = this.userInfo?.email;
     if (email) {
-      const apiUrl = `http://localhost:8090/api/gonullu/findByEmail?email=${email}`;
+      const apiUrl = `${environment.apiUrl}/gonullu/findByEmail?email=${email}`;
 
       this.accountService.getGonulluByEmail(apiUrl).subscribe(
         (data) => {

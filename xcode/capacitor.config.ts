@@ -7,8 +7,6 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https',
     iosScheme: 'https',
-    hostname: 'localhost',
-    port: 8100
   }
 };
 
